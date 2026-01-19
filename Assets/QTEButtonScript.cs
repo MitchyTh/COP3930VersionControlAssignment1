@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,8 +11,8 @@ public class QTEButtonScript : MonoBehaviour
     public moveSystemScript moveScript;
 
     private bool leftSide;
-    private int correctButton;
-    private int pressedButton;
+    private int correctButton = -1;
+    private bool gameStarted = false;
 
     public Image player1Image, Player2Image;
 
@@ -22,6 +23,7 @@ public class QTEButtonScript : MonoBehaviour
     // Player 2 (right side)
     public Sprite[] player2Keys = new Sprite[4]; // Up, Down, Left, Right
 
+    Key[] playerButtons = { Key.W, Key.A, Key.S, Key.D, Key.UpArrow, Key.DownArrow, Key.LeftArrow, Key.RightArrow };
     void Awake()
     {
         leftSide = Random.Range (0, 2) == 0;
@@ -40,24 +42,41 @@ public class QTEButtonScript : MonoBehaviour
         {
             correctButton = Random.Range(0, 4);
             player1Image.sprite = player1Keys[correctButton];
+            Player2Image.sprite = null;
         }
         else
         {
             correctButton = Random.Range(4, 8);
-            Player2Image.sprite = player2Keys[correctButton];
-        }
-    }
-    void Update()
-    {
-        if (stepAction != null && stepAction.action.WasPressedThisFrame())
-        {
-            moveScript.Step();
+            Player2Image.sprite = player2Keys[correctButton - 4];
+            player1Image.sprite = null;
         }
     }
 
-    void OnDisable()
+    public void selectButton()
     {
-        if (stepAction != null)
-            stepAction.action.Disable();
+        if (correctButton == -1)
+        {
+            chooseButton();
+        }
+        else
+        {
+            Key expectedKey = playerButtons[correctButton];
+            if (Keyboard.current[expectedKey].wasPressedThisFrame)
+            {
+                moveScript.Step();
+                chooseButton();
+                leftSide = Random.Range(0, 2) == 0;
+            }
+        }
     }
+        void Update()
+        {
+            selectButton();
+        }
+
+        void OnDisable()
+        {
+            if (stepAction != null)
+                stepAction.action.Disable();
+        }
 }
