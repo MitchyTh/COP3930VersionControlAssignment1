@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,9 +14,11 @@ public class QTEButtonScript : MonoBehaviour
 
     private bool leftSide;
     private int correctButton = -1;
-    private bool gameStarted = false;
+    private bool inputLocked = false;
 
     public Image player1Image, Player2Image;
+    public TextMeshProUGUI winText;
+    public GameObject redBorder;
 
     //Images
     // Player 1 (left side)
@@ -27,6 +31,9 @@ public class QTEButtonScript : MonoBehaviour
     void Awake()
     {
         leftSide = Random.Range (0, 2) == 0;
+        winText.enabled = false;
+        redBorder.SetActive(false);
+
         if (stepAction == null)
         {
             Debug.LogError("StepAction not assigned in Inspector", this);
@@ -54,6 +61,8 @@ public class QTEButtonScript : MonoBehaviour
 
     public void selectButton()
     {
+        if (inputLocked) return; // Skip if waiting
+
         if (correctButton == -1)
         {
             chooseButton();
@@ -67,16 +76,43 @@ public class QTEButtonScript : MonoBehaviour
                 chooseButton();
                 leftSide = Random.Range(0, 2) == 0;
             }
+            else if (Keyboard.current.anyKey.wasPressedThisFrame)
+            {
+                // Lock input and start fail coroutine
+                StartCoroutine(InputFail(1f));
+            }
         }
     }
-        void Update()
+    void Update()
+    {
+        selectButton();
+        if (moveScript.won == true)
         {
-            selectButton();
+            winText.enabled = true;
         }
+    }
 
-        void OnDisable()
-        {
-            if (stepAction != null)
-                stepAction.action.Disable();
-        }
+    void OnDisable()
+    {
+        if (stepAction != null)
+            stepAction.action.Disable();
+    }
+
+    public IEnumerator InputFail(float waitTime)
+    {
+        inputLocked = true; // Lock input
+        redBorder.SetActive(true);
+        stepAction.action.Disable();
+
+        yield return new WaitForSeconds(waitTime);
+
+        player1Image.sprite = null;
+        Player2Image.sprite = null;
+        correctButton = -1;
+
+        stepAction.action.Enable();
+        inputLocked = false; // Unlock input
+        redBorder.SetActive(false);
+
+    }
 }

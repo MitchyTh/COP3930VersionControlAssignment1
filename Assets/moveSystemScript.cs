@@ -8,6 +8,7 @@ public class moveSystemScript : MonoBehaviour
     private bool success;
     public int stepsToWin = 15;
     private int stepsTaken = 0;
+    public bool won = false;
 
     public void Step()
     {
@@ -15,6 +16,9 @@ public class moveSystemScript : MonoBehaviour
         Vector3 endPos = startPos + new Vector3(0.2f, 0, 0);
         transform.position = Vector3.Lerp(startPos, endPos, 0.5f);
         stepsTaken++;
-        if (stepsTaken >= stepsToWin) { Debug.Log("You Win"); }
+        if (stepsTaken >= stepsToWin) 
+        {
+            won = true;
+        }
     }
 }
