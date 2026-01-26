@@ -9,11 +9,12 @@ public class moveSystemScript : MonoBehaviour
     public int stepsToWin = 15;
     private int stepsTaken = 0;
     public bool won = false;
+    public float moveDistance = 0.5f;
 
     public void Step()
     {
         Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + new Vector3(0.2f, 0, 0);
+        Vector3 endPos = startPos + new Vector3(moveDistance, 0, 0);
         transform.position = Vector3.Lerp(startPos, endPos, 0.5f);
         stepsTaken++;
         if (stepsTaken >= stepsToWin) 
