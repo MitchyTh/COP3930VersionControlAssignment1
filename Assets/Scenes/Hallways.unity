@@ -1278,7 +1278,6 @@ PrefabInstance:
     - {fileID: 4738558639147882546, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
     - {fileID: 4990764682642888921, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
     - {fileID: 2383631508651570851, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
-    - {fileID: 5615815007780928290, guid: 7ae956b4f54394e80818898d8f4d30c6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1313,6 +1312,7 @@ MonoBehaviour:
   stepsToWin: 98
   won: 0
   moveDistance: 0.5
+  stepTime: 0.3
 --- !u!65 &336369667
 BoxCollider:
   m_ObjectHideFlags: 0

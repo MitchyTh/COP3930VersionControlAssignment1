@@ -72,7 +72,7 @@ public class QTEButtonScript : MonoBehaviour
             Key expectedKey = playerButtons[correctButton];
             if (Keyboard.current[expectedKey].wasPressedThisFrame)
             {
-                moveScript.Step();
+                StartCoroutine(moveScript.Step());
                 chooseButton();
                 leftSide = Random.Range(0, 2) == 0;
             }
