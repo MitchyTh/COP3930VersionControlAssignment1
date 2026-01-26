@@ -14,7 +14,7 @@ public class moveSystemScript : MonoBehaviour
     public void Step()
     {
         Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + new Vector3(moveDistance, 0, 0);
+        Vector3 endPos = startPos + new Vector3(0, 0, moveDistance);
         transform.position = Vector3.Lerp(startPos, endPos, 0.5f);
         stepsTaken++;
         if (stepsTaken >= stepsToWin) 

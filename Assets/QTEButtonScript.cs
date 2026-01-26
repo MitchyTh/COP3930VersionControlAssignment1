@@ -89,6 +89,7 @@ public class QTEButtonScript : MonoBehaviour
         if (moveScript.won == true)
         {
             winText.enabled = true;
+            Time.timeScale = 0f;
         }
     }
 
