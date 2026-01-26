@@ -1311,7 +1311,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   stepsToWin: 98
   won: 0
-  moveDistance: 0.5
+  moveDistance: 0.4
   stepTime: 0.3
 --- !u!65 &336369667
 BoxCollider:
