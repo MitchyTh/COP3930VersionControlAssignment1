@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ecc93ec939d5ddf4ba708e8c4b0eca54
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342644
+  packageName: Fire Effect In Object
+  packageVersion: 1.0
+  assetPath: Assets/EffectElementalInObject/FreeAsset/Datas 1/Scripts/Rotate2.cs
+  uploadId: 812918

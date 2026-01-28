@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 85cf2113d3f1b6349ab191828397770f
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342644
+  packageName: Fire Effect In Object
+  packageVersion: 1.0
+  assetPath: Assets/EffectElementalInObject/FreeAsset/Built_In/Shaders/FireInObject1.shader
+  uploadId: 812918
